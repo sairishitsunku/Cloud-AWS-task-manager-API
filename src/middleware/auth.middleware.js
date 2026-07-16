@@ -1,7 +1,7 @@
 const AppError = require('../utils/AppError');
 const { verifyAccessToken } = require('../utils/token');
 
-function authenticateRequest(req, res, next) {
+function authenticateRequest(req, _res, next) {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -17,7 +17,7 @@ function authenticateRequest(req, res, next) {
       email: decoded.email
     };
     return next();
-  } catch (error) {
+  } catch (_error) {
     return next(new AppError('Invalid or expired token', 401));
   }
 }

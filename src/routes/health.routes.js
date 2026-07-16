@@ -1,13 +1,9 @@
 const express = require('express');
+const healthController = require('../controllers/health.controller');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: 'Task Manager API is healthy',
-    timestamp: new Date().toISOString(),
-    uptime: process.uptime()
-  });
-});
+router.get('/', healthController.live);
+router.get('/live', healthController.live);
+router.get('/ready', healthController.ready);
 
 module.exports = router;

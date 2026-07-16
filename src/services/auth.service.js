@@ -4,7 +4,7 @@ const { comparePassword, hashPassword } = require('../utils/password');
 const { signAccessToken } = require('../utils/token');
 
 function sanitizeUser(user) {
-  const { password, ...safeUser } = user;
+  const { password: _password, ...safeUser } = user;
   return safeUser;
 }
 
