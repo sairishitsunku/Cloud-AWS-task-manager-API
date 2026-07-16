@@ -140,6 +140,19 @@ The Compose stack exposes:
 - API: `http://localhost:3000`
 - PostgreSQL: `localhost:5432`
 
+## GitHub Actions Deployment
+
+The CI workflow runs tests and builds the Docker image on pull requests and pushes to `main`.
+
+Deployment to EC2 runs on pushes to `main` only when these repository secrets are configured:
+
+- `EC2_HOST` - EC2 public IP address or DNS name
+- `EC2_USER` - SSH username, for example `ubuntu` or `ec2-user`
+- `EC2_SSH_KEY` - private SSH key with access to the EC2 instance
+- `DEPLOY_PATH` - application directory on the EC2 instance
+
+If any deployment secret is missing, the deploy job is skipped with a warning.
+
 ## Health Checks
 
 - Liveness: `GET /api/v1/health/live`
