@@ -13,3 +13,8 @@ logs/
 .DS_Store
 .vscode/settings.json
 .vscode/tasks.json
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log

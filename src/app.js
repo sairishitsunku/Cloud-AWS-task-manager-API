@@ -2,9 +2,11 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const swaggerUi = require('swagger-ui-express');
 const routes = require('./routes');
 const env = require('./config/env');
 const logger = require('./config/logger');
+const swaggerSpec = require('./config/swagger');
 const { notFoundHandler, errorHandler } = require('./middleware/error.middleware');
 
 function createApp() {
@@ -29,6 +31,10 @@ function createApp() {
       message: 'Cloud-Native Task Manager API'
     });
   });
+
+  if (env.swaggerEnabled) {
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  }
 
   app.use('/api/v1', routes);
   app.use(notFoundHandler);

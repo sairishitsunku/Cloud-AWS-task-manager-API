@@ -28,7 +28,8 @@ describe('Express app integration', () => {
 
     expect(response.statusCode).toBe(200);
     expect(response.body.success).toBe(true);
-    expect(response.body.message).toBe('Task Manager API is healthy');
+    expect(response.body.status).toBe('ok');
+    expect(response.body.mode).toBe('live');
   });
 
   test('POST /api/v1/auth/register returns mocked auth response', async () => {

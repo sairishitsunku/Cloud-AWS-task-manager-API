@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: task-manager-api
+  namespace: task-manager
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+spec:
+  tls:
+    - hosts:
+        - api.example.com
+      secretName: task-manager-tls
+  rules:
+    - host: api.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: task-manager-api
+                port:
+                  number: 80
