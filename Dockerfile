@@ -4,6 +4,7 @@ COPY package*.json ./
 RUN npm ci
 
 FROM deps AS builder
+COPY src ./src
 COPY prisma ./prisma
 ENV DATABASE_URL=postgresql://postgres:postgres@localhost:5432/task_manager?schema=public
 RUN npx prisma generate
